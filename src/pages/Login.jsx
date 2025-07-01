@@ -19,12 +19,14 @@ import { bgGradient } from "../constants/color";
 import { server } from "../constants/config";
 import { userExists } from "../redux/reducers/auth";
 import { usernameValidator } from "../utils/validator";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [isLogin, seIsLogin] = useState(true);
   const [IsLoading, setIsLoading] = useState(false)
 
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const toggleLogin = () => {
     seIsLogin((prev) => !prev);
@@ -104,6 +106,7 @@ const Login = () => {
       console.log('====================================');
       dispatch(userExists(data.user))
       toast.success(data.message, { id: toastId })
+      navigate("/login");
     } catch (error) {
       toast.error(error?.response?.data?.message || "something want wrong", { id: toastId })
     } finally {

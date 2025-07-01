@@ -40,7 +40,7 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    const toastId =  toast.loading("Logging In...")
+    const toastId = toast.loading("Logging In...")
 
     setIsLoading(true)
 
@@ -59,10 +59,10 @@ const Login = () => {
         config
       );
       dispatch(userExists(data.user))
-      toast.success(data.message, {id: toastId})
+      toast.success(data.message, { id: toastId })
     }
     catch (error) {
-      toast.error(error?.response?.data?.message || "something want wrong", {id: toastId})
+      toast.error(error?.response?.data?.message || "something want wrong", { id: toastId })
     } finally {
       setIsLoading(false)
     }
@@ -74,14 +74,19 @@ const Login = () => {
 
     setIsLoading(true)
 
-    const toastId =  toast.loading("Signing up...")
+    const toastId = toast.loading("Signing up...")
     const formData = new FormData()
 
-    formData.append("avatar", avatar.file)
+    formData.append("avatar", avatar?.file)
     formData.append("name", name.value);
     formData.append("bio", bio.value);
     formData.append("username", username.value);
     formData.append("password", password.value);
+
+      console.log('=== FormData Entries ===');
+  for (let [key, value] of formData.entries()) {
+    console.log(`${key}:`, value);
+  }
 
     const config = {
       withCredentials: true,
@@ -91,12 +96,16 @@ const Login = () => {
     }
 
     try {
+      
       const { data } = axios.post(`${server}/api/v1/user/new`, formData, config)
 
+      console.log('====================================');
+      console.log("data sign up", data.user);
+      console.log('====================================');
       dispatch(userExists(data.user))
-      toast.success(data.message, {id: toastId})
+      toast.success(data.message, { id: toastId })
     } catch (error) {
-      toast.error(error?.response?.data?.message || "something want wrong", {id: toastId})
+      toast.error(error?.response?.data?.message || "something want wrong", { id: toastId })
     } finally {
       setIsLoading(false)
     };

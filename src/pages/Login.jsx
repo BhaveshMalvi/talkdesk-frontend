@@ -99,7 +99,7 @@ const Login = () => {
 
     try {
       
-      const { data } = axios.post(`${server}/api/v1/user/new`, formData, config)
+      const { data } = await axios.post(`${server}/api/v1/user/new`, formData, config)
 
       console.log('====================================');
       console.log("data sign up", data.user);

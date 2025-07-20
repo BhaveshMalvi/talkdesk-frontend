@@ -23,7 +23,13 @@ const UserItem = ({
         {...styling}
       >
         {/* <Avatar src={transformImage(avatar)} /> */}
-        <Avatar src={avatar} />
+       <Avatar 
+  src={avatar} 
+  sx={{ 
+    width: 30,  // pixels
+    height: 30, // pixels
+  }} 
+/>
 
         <Typography
           variant="body1"
@@ -35,6 +41,7 @@ const UserItem = ({
             overflow: "hidden",
             textOverflow: "ellipsis",
             width: "100%",
+            fontSize:"0.7rem"
           }}
         >
           {name}
@@ -47,6 +54,8 @@ const UserItem = ({
             "&:hover": {
               bgcolor: isAdded ? "error.dark" : "primary.dark",
             },
+            width:30,
+            height:30
           }}
           onClick={() => handler(_id)}
           disabled={handlerIsLoading}

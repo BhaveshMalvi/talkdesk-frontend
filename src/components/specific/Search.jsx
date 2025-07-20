@@ -65,9 +65,15 @@ const SearchDialog = () => {
 
   return (
     <Dialog open={isSearch} onClose={searchCloseHandler}>
-      <Stack p={"2rem"} direction={"column"} width={"25rem"}>
-        <DialogTitle textAlign={"center"}> Find People</DialogTitle>
-        <TextField label="" value={search.value} onChange={search.changeHandler} variant='outlined' size='small' InputProps={{
+      <Stack p={"2rem"} direction={"column"}   
+      sx={{
+      width: {
+        xs: "16rem",  // for extra small screens
+        sm: "25rem",  // for small screens and up
+      }
+    }}>
+        <DialogTitle textAlign={"center"} sx={{ fontSize:"1rem"}}> Find People</DialogTitle>
+        <TextField label="" value={search.value} onChange={search.changeHandler} variant='outlined' size='small' sx={{ size:"0.7rem"}} InputProps={{
           startAdornment: (
             <InputAdornment position='start'>
               <SearchIcon />

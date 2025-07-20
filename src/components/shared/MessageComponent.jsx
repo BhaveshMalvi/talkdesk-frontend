@@ -140,43 +140,54 @@ const MessageComponent = ({ message, user }) => {
 
                     {/* Attachments */}
                     {attachments.length > 0 && (
-                        <Box sx={{ mt: 1, display: 'flex', flexDirection: 'column', gap: 1 }}>
-                            {attachments.map((attachment, index) => {
-                                const url = attachment.url;
-                                const file = fileFormat(url);
+  <Box sx={{ mt: 1, display: 'flex', flexDirection: 'column', gap: 1 }}>
+    {attachments.map((attachment, index) => {
+      const url = attachment.url;
+      const file = fileFormat(url);
 
-                                return (
-                                    <Link
-                                        key={index}
-                                        href={url}
-                                        target='_blank'
-                                        download
-                                        underline="none"
-                                        sx={{ color: 'inherit' }}
-                                    >
-                                        <Box
-                                            sx={{
-                                                border: '1px solid #e0e0e0',
-                                                borderRadius: 1,
-                                                p: 1,
-                                                backgroundColor: '#f9f9f9',
-                                                maxWidth: 300,
-                                                width: '100%',
-                                            }}
-
-
-                                        >
-                                            <a href={url} target='_blank' download style={{ color: "black" }} >
-                                {console.log('---', url, file)}
-                                {RenderAttachment(file, url)}
-                            </a>
-                                        </Box>
-                                    </Link>
-                                );
-                            })}
-                        </Box>
-                    )}
-
+      return (
+        <Link
+          key={index}
+          href={url}
+          target='_blank'
+          download
+          underline="none"
+          sx={{ color: 'inherit' }}
+        >
+          <Box
+            sx={{
+              border: '1px solid #e0e0e0',
+              borderRadius: 1,
+              p: 1,
+              backgroundColor: '#f9f9f9',
+              maxWidth: 300,
+              width: '100%',
+              overflow: 'hidden', // Prevent content overflow
+            }}
+          >
+            <Box
+              component="div"
+              sx={{
+                width: '100%',
+                maxHeight: 200,
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                '& img, & video': {
+                  maxWidth: '100%',
+                  maxHeight: '100%',
+                  objectFit: 'contain', // Maintain aspect ratio
+                }
+              }}
+            >
+              {RenderAttachment(file, url)}
+            </Box>
+          </Box>
+        </Link>
+      );
+    })}
+  </Box>
+)}
                     {/* Timestamp */}
                     <Typography
                         variant='caption'
